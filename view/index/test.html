@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://aframe.io/aframe/examples/showcase/anime-UI/ -->
+<html class="a-fullscreen">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HourCode</title>
+    <script src="/static/js/aframe-master.min.js"></script>
+    <script src="/static/js/aframe-text-geometry-component.min.js"></script>
+    <script src="/static/js/aframe-html-shader.min.js"></script>
+    </style>
+
+<body>
+
+
+
+
+<a-scene renderer="colorManagement: true;" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+    <!-- 素材 -->
+    <a-assets>
+        <a-asset-item id="optimerBoldFont" src="/font/optimer_bold.typeface.json"></a-asset-item>
+        <a-asset-item id="engine" src="/3d/engine.glb"></a-asset-item>
+        <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+        <a-mixin id="toggleAnimation" animation="property: visible; from: false; to: true; dur: 1" visible="false">
+        </a-mixin>
+        <audio id="blip1" src="/sound/321103__nsstudios__blip1.wav"></audio>
+        <audio id="blip2" src="/sound/321104__nsstudios__blip2.wav"></audio>
+    </a-assets>
+
+    <!-- 背景环境模型 -->
+    <a-entity position="0 0 -3">
+        <a-gltf-model src="#engine" rotation="90 0 0" scale="18 18 18" gltf-model=""></a-gltf-model>
+    </a-entity>
+
+    <!-- 菜单 -->
+    <a-entity position="-4 0 -6" scale="2 2 2" rotation="0 0 0">
+        <a-box id="Train" material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable"
+               color="pink"></a-box>
+        <a-box id="Train" scale="1.25 1.25 1.25"
+               material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable" color="pink">
+        </a-box>
+        <a-entity material="metalness: 0.85;;color:#ff88ff" position="-0.4 -0.08 0"
+                  text-geometry="value:SHOW; font: #optimerBoldFont;height:0.1;size:0.2" color="#333333"></a-entity>
+        <a-entity scale="8 8 8" position="0 1.2 0" text="color: #ffccff; font:dejavu; align: center;value: SHOW">
+        </a-entity>
+    </a-entity>
+
+    <a-entity position="0 0 -6" scale="2 2 2" rotation="0 0 0">
+        <a-box id="Train" material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable"
+               color="blue"></a-box>
+        <a-box id="Train" scale="1.25 1.25 1.25"
+               material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable" color="blue">
+        </a-box>
+        <a-entity material="metalness: 0.85;;color:#88ff88" position="-0.4 -0.08 0"
+                  text-geometry="value:TRAIN; font: #optimerBoldFont;height:0.1;size:0.2" color="#333333"></a-entity>
+        <a-entity scale="8 8 8" position="0 1.2 0" text="color: #ccccff; font:dejavu; align: center;value: TRAIN">
+        </a-entity>
+    </a-entity>
+
+    <a-entity position="4 0 -6" scale="2 2 2" rotation="0 0 0">
+        <a-box id="Train" material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable"
+               color="green"></a-box>
+        <a-box id="Train" scale="1.25 1.25 1.25"
+               material="opacity:0.3;side: double;metalness: 0.85;blending:additive" class="clickable" color="green">
+        </a-box>
+        <a-entity material="metalness: 0.85;color:#88ff88" position="-0.4 -0.08 0"
+                  text-geometry="value:LEARN; font: #optimerBoldFont;height:0.1;size:0.2"></a-entity>
+        <a-entity scale="8 8 8" position="0 1.2 0" text="color: #ccffcc; font:dejavu; align: center;value: LEARN">
+        </a-entity>
+    </a-entity>
+
+
+    <!-- 标签文字 -->
+
+    <div id='labels' style="display:none">
+        <div id="label-1" style="position: absolute;color: #ffaaff;font-size: 100px;font-weight: bold">表演台</div>
+        <div id="label-2" style="position: absolute;color: #aaaaff;font-size: 100px;font-weight: bold">训练场</div>
+        <div id="label-3" style="position: absolute;color: #aaffaa;font-size: 100px;font-weight: bold">学习营</div>
+    </div>
+
+    <a-entity>
+        <a-entity geometry="primitive: plane" position="-4 -2 -6" scale="0.5 0.5 0.5"
+                  material="shader:html;target:#label-1;transparent:true;ratio:height;fps:1;"> </a-entity>
+        <a-entity geometry="primitive: plane" position="0 -2 -6" scale="0.5 0.5 0.5"
+                  material="shader:html;target:#label-2;transparent:true;ratio:height;fps:1;side:double;"> </a-entity>
+        <a-entity geometry="primitive: plane" position="4 -2 -6" scale="0.5 0.5 0.5"
+                  material="shader:html;target:#label-3;transparent:true;ratio:height;fps:1;side:double;"> </a-entity>
+    </a-entity>
+
+
+    <!-- 摄像机 -->
+    <a-entity position="0 0 0" rotation="0 0 0">
+        <a-camera position="0 0 0" near="0.1" camera="" rotation="" look-controls="" wasd-controls=""></a-camera>
+    </a-entity>
+
+    <!-- 灯光 -->
+    <a-light id="left" type="point" color="#ff00ec" distance="10" decay="1" position="-2 2 -4" intensity="10"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="right" type="point" color="#ffff00" distance="20" decay="4" position="4 0 -8" intensity="16"
+             animation="property: light.intensity; from: 0; to: 20; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="top" type="point" color="#00a0ff" distance="10" decay="2" position="0 2 -10" intensity="10"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="bot" type="point" color="#3fff00" distance="10" decay="2" position="-2 -5 -10" intensity="10"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="farright" type="point" color="#ff4400" distance="14" decay="6" position="-5 4 -12" intensity="1"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="farleft" type="point" color="#0000ff" distance="20" decay="6" position="5 0 -12" intensity="2"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+
+    <a-light id="env" type="point" color="#00aaff" distance="20" decay="6" position="0 0 0" intensity="10"
+             animation="property: light.intensity; from: 0; to: 10; delay: 500; dur: 500" light=""></a-light>
+    <!-- <a-light type="ambient" intensity="1" color="#00" light=""></a-light> -->
+
+    <!-- 启动声效 -->
+    <a-entity sound="autoplay: true; src: #blip1"></a-entity>
+    <a-entity sound="autoplay: true; src: #blip2"></a-entity>
+
+</a-scene>
+
+
+<audio controls="controls" style="display: none;"></audio>
+</body>
+
+<script>
+    var tmr=setInterval(function(){
+        if (document.querySelector("canvas")){
+            setTimeout(()=>{
+                document.querySelector("#labels").style.display="block"
+            },1500)
+            clearInterval(tmr)
+        }
+    },100)
+</script>
+
+</html>
